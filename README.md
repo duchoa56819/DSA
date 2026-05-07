@@ -22,6 +22,16 @@
 ## 🎮 [Interactive Visualizer](./visualizer/index.html)
 Website tương tác giúp bạn nhìn thấy thuật toán chạy từng bước!
 
+## 🏆 [Phần Nâng Cao (Advanced)](./advanced/)
+| Chương | Chủ đề | Mức độ |
+|--------|--------|--------|
+| 11 | [Thuật Toán Chuỗi (KMP, Rabin-Karp, Z, Suffix Array)](./advanced/11-string-algorithms/) | ⭐⭐⭐ |
+| 12 | [CTDL Nâng Cao (AVL, Fenwick, Skip List, LRU)](./advanced/12-advanced-ds/) | ⭐⭐⭐⭐ |
+| 13 | [DP Nâng Cao (Bitmask, Tree DP, Digit DP)](./advanced/13-advanced-dp/) | ⭐⭐⭐⭐ |
+| 14 | [Luồng Mạng (Max Flow, Bipartite Matching)](./advanced/14-network-flow/) | ⭐⭐⭐⭐ |
+| 15 | [Hình Học Tính Toán (Convex Hull, Closest Pair)](./advanced/15-computational-geometry/) | ⭐⭐⭐⭐ |
+| 16 | [Bloom Filter, Reservoir Sampling, Monotonic Stack](./advanced/16-probabilistic/) | ⭐⭐⭐⭐ |
+
 ---
 
 ## 🚀 Cách Sử Dụng
