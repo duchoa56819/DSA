@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Visualizer — Trực quan hóa Thuật toán</title>
+    <meta name="description" content="Interactive visualization tool for Data Structures and Algorithms">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header" id="main-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <h1>DSA Visualizer</h1>
+                </div>
+                <p class="subtitle">Trực quan hóa Cấu trúc Dữ liệu & Giải thuật</p>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav" id="tab-navigation">
+            <button class="tab-btn active" data-tab="sorting" id="tab-sorting">🔀 Sorting</button>
+            <button class="tab-btn" data-tab="searching" id="tab-searching">🔍 Searching</button>
+            <button class="tab-btn" data-tab="pathfinding" id="tab-pathfinding">🗺️ Pathfinding</button>
+            <button class="tab-btn" data-tab="ds" id="tab-ds">🌳 Data Structures</button>
+        </nav>
+
+        <!-- Sorting Tab -->
+        <section class="tab-content active" id="sorting-tab">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="sort-algo">Thuật toán:</label>
+                    <select id="sort-algo">
+                        <option value="bubble">Bubble Sort — O(n²)</option>
+                        <option value="selection">Selection Sort — O(n²)</option>
+                        <option value="insertion">Insertion Sort — O(n²)</option>
+                        <option value="merge">Merge Sort — O(n log n)</option>
+                        <option value="quick">Quick Sort — O(n log n)</option>
+                        <option value="heap">Heap Sort — O(n log n)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="sort-size">Kích thước: <span id="size-value">50</span></label>
+                    <input type="range" id="sort-size" min="10" max="150" value="50">
+                </div>
+                <div class="control-group">
+                    <label for="sort-speed">Tốc độ: <span id="speed-value">50</span>ms</label>
+                    <input type="range" id="sort-speed" min="1" max="200" value="50">
+                </div>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" id="sort-start">▶ Bắt đầu</button>
+                    <button class="btn btn-secondary" id="sort-reset">↻ Mảng mới</button>
+                    <button class="btn btn-danger" id="sort-stop">⏹ Dừng</button>
+                </div>
+            </div>
+            <div class="stats" id="sort-stats">
+                <div class="stat"><span class="stat-label">So sánh:</span> <span id="comparisons">0</span></div>
+                <div class="stat"><span class="stat-label">Hoán đổi:</span> <span id="swaps">0</span></div>
+                <div class="stat"><span class="stat-label">Thời gian:</span> <span id="elapsed">0ms</span></div>
+            </div>
+            <div class="canvas-container">
+                <canvas id="sort-canvas"></canvas>
+            </div>
+            <div class="info-panel" id="sort-info">
+                <h3>Bubble Sort</h3>
+                <p>So sánh từng cặp liền kề, đẩy phần tử lớn về cuối. Như bong bóng nổi lên mặt nước.</p>
+            </div>
+        </section>
+
+        <!-- Searching Tab -->
+        <section class="tab-content" id="searching-tab">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="search-algo">Thuật toán:</label>
+                    <select id="search-algo">
+                        <option value="linear">Linear Search — O(n)</option>
+                        <option value="binary">Binary Search — O(log n)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="search-target">Tìm giá trị:</label>
+                    <input type="number" id="search-target" value="42" min="1" max="100">
+                </div>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" id="search-start">▶ Tìm kiếm</button>
+                    <button class="btn btn-secondary" id="search-reset">↻ Reset</button>
+                </div>
+            </div>
+            <div class="stats" id="search-stats">
+                <div class="stat"><span class="stat-label">Bước:</span> <span id="search-steps">0</span></div>
+                <div class="stat"><span class="stat-label">Kết quả:</span> <span id="search-result">—</span></div>
+            </div>
+            <div class="canvas-container">
+                <canvas id="search-canvas"></canvas>
+            </div>
+        </section>
+
+        <!-- Pathfinding Tab -->
+        <section class="tab-content" id="pathfinding-tab">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="path-algo">Thuật toán:</label>
+                    <select id="path-algo">
+                        <option value="bfs">BFS — Breadth-First Search</option>
+                        <option value="dfs">DFS — Depth-First Search</option>
+                        <option value="dijkstra">Dijkstra — Shortest Path</option>
+                    </select>
+                </div>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" id="path-start">▶ Tìm đường</button>
+                    <button class="btn btn-secondary" id="path-reset">↻ Reset</button>
+                    <button class="btn btn-accent" id="path-maze">🧱 Tạo mê cung</button>
+                </div>
+            </div>
+            <div class="path-legend">
+                <span class="legend-item"><span class="legend-color" style="background:#00e676"></span> Bắt đầu</span>
+                <span class="legend-item"><span class="legend-color" style="background:#ff1744"></span> Đích</span>
+                <span class="legend-item"><span class="legend-color" style="background:#37474f"></span> Tường</span>
+                <span class="legend-item"><span class="legend-color" style="background:#7c4dff"></span> Đã duyệt</span>
+                <span class="legend-item"><span class="legend-color" style="background:#ffea00"></span> Đường đi</span>
+            </div>
+            <div class="canvas-container">
+                <canvas id="path-canvas"></canvas>
+            </div>
+            <p class="hint">💡 Click để đặt/xóa tường. Kéo điểm xanh/đỏ để di chuyển.</p>
+        </section>
+
+        <!-- Data Structures Tab -->
+        <section class="tab-content" id="ds-tab">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="ds-type">Cấu trúc:</label>
+                    <select id="ds-type">
+                        <option value="bst">Binary Search Tree</option>
+                        <option value="heap-vis">Min-Heap</option>
+                        <option value="stack-vis">Stack</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="ds-value">Giá trị:</label>
+                    <input type="number" id="ds-value" value="50" min="1" max="999">
+                </div>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" id="ds-insert">➕ Thêm</button>
+                    <button class="btn btn-danger" id="ds-delete">➖ Xóa</button>
+                    <button class="btn btn-secondary" id="ds-clear">🗑️ Xóa hết</button>
+                    <button class="btn btn-accent" id="ds-random">🎲 Random</button>
+                </div>
+            </div>
+            <div class="canvas-container">
+                <canvas id="ds-canvas"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
